@@ -1,0 +1,29 @@
+:javascript
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  
+#fb-root
+:javascript
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+-@posts.each do |post|
+  #postbox
+    -if post.link
+      %h1= link_to post.title, post.link
+    -else
+      %h1= post.title
+    %h6= time_ago_in_words(post.created_at) + ' ago'
+  #body
+    = post.body.html_safe
+    %div{ :style => "clear: both;"} &nbsp;
+    #share
+      %a{:href => "https://twitter.com/share", :class => "twitter-share-button", "data-url" => post_url(post)} tweet
+      %br
+      .fb-like{ "data-href" => post_url(post), "data-send" => "false", "data-layout" => "button_count", "data-width" => "90", "data-show-faces" => "false"}
+  #break  
+  

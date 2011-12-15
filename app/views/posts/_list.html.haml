@@ -1,0 +1,13 @@
+%table
+  %tr
+    %th Title
+    %th Created At
+    %th 
+    %th
+  - @posts.each do |post|
+    %tr
+      %td= post.title
+      %td= post.created_at.strftime("%m/%d/%Y")
+      %td= link_to 'edit', edit_post_path(post)
+      %td= link_to 'delete', post, :method => :delete
+  

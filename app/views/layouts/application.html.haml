@@ -1,0 +1,27 @@
+%html
+%head
+  %title Meliora Global
+  = stylesheet_link_tag    "application"
+  = javascript_include_tag "application"
+  = javascript_include_tag "http://js.nicedit.com/nicEdit-latest.js"
+  = csrf_meta_tags
+%body
+  #topbar
+    = image_tag "meliora_icon.png"
+    %h1 Meliora Global
+  #contain
+    #nav
+      %ul
+        %li
+          =link_to "Blog", posts_path
+        %li  
+          = link_to "About Us", page_path("about")
+        - $folders.each do |f|
+          %li
+            =link_to f.tag, "#{posts_url}?folder=#{f.tag}"
+    #main
+      = yield 
+  #footer
+    %p Copyright 2012 Meliora Global
+
+
